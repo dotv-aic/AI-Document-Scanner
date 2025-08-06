@@ -1,10 +1,29 @@
 workflows:
-  default-workflow:
-    name: Build Android App
+  android-build:
+    name: Build Android APK
+    max_build_duration: 30
     environment:
       flutter: stable
+      vars:
+        PACKAGE_NAME: "com.example.aidocumentscanner" # <--- Đổi nếu bạn đã sửa Android package
+      android_signing:
+        keystore: ENCODED_KEYSTORE
+        keystore_password: ENCODED_KEYSTORE_PASSWORD
+        key_alias: ENCODED_KEY_ALIAS
+        key_password: ENCODED_KEY_PASSWORD
     scripts:
-      - name: Get dependencies
-        script: flutter pub get
-      - name: Build APK
-        script: flutter build apk
+      - name: 📦 Get dependencies
+        script: |
+          flutter pub get
+      - name: 🔍 Run analyzer (optional)
+        script: |
+          flutter analyze
+      - name: 🛠️ Build APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - dotvision.f@gmail.com
