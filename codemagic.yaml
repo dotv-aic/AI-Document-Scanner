@@ -8,9 +8,9 @@ workflows:
         PACKAGE_NAME: "com.example.aidocumentscanner" # <--- Đổi nếu bạn đã sửa Android package
       android_signing:
         - keystore: ENCODED_KEYSTORE
-          keystore_password: ENCODED_KEYSTORE_PASSWORD
-          key_alias: ENCODED_KEY_ALIAS
-          key_password: ENCODED_KEY_PASSWORD
+        - keystore_password: ENCODED_KEYSTORE_PASSWORD
+        - key_alias: ENCODED_KEY_ALIAS
+        - key_password: ENCODED_KEY_PASSWORD
     scripts:
       - name: 📦 Get dependencies
         script: |
